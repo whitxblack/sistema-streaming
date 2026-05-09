@@ -1,0 +1,16 @@
+{
+  "name": "SubTrack – Gestor de Suscripciones",
+  "short_name": "SubTrack",
+  "description": "Administra tus suscripciones y pagos digitales con elegancia.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#16130e",
+  "theme_color": "#e9c176",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "src/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "src/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "categories": ["finance", "utilities"],
+  "lang": "es"
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#16130e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="SubTrack" />
+  <meta name="description" content="Gestor de Suscripciones Premium – Administra tus servicios streaming y pagos digitales con total elegancia." />
+  <title>SubTrack – Gestor de Suscripciones</title>
+
+  <!-- PWA / iOS Icons -->
+  <link rel="apple-touch-icon" href="src/assets/icons/icon-192.png" />
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="src/css/design-tokens.css" />
+  <link rel="stylesheet" href="src/css/animations.css" />
+  <link rel="stylesheet" href="src/css/components.css" />
+  <link rel="stylesheet" href="src/css/app.css" />
+</head>
+<body>
+
+  <div id="app">
+    <div id="app-loader" class="app-loader">
+      <div class="loader-logo">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect width="48" height="48" rx="14" fill="#e9c176" fill-opacity="0.15"/>
+          <path d="M12 24C12 17.373 17.373 12 24 12C30.627 12 36 17.373 36 24C36 30.627 30.627 36 24 36" stroke="#e9c176" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M24 18V24L28 27" stroke="#e9c176" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="loader-brand">SubTrack</span>
+      </div>
+      <div class="loader-spinner"></div>
+    </div>
+
+    <div id="router-view"></div>
+    <div id="toast-container" aria-live="polite"></div>
+    <div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <!-- 1. Supabase SDK (UMD – expone window.supabase) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+  <!-- 2. Scripts clásicos de la app (orden importa) -->
+  <script src="src/js/store.js"></script>
+  <script src="src/js/api.js"></script>
+  <script src="src/js/router.js"></script>
+  <script src="src/components/modal.js"></script>
+  <script src="src/components/toast.js"></script>
+  <script src="src/components/navbar.js"></script>
+  <script src="src/views/login.js"></script>
+  <script src="src/views/payment.js"></script>
+  <script src="src/views/dashboard.js"></script>
+  <script src="src/views/subscriptions.js"></script>
+  <script src="src/views/history.js"></script>
+  <script src="src/views/profile.js"></script>
+  <script src="src/views/admin.js"></script>
+  <script src="src/js/app.js"></script>
+
+</body>
+</html>
