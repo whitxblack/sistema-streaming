@@ -1,5 +1,5 @@
 /* ============================================================
-   DESIGN TOKENS — SubTrack Subscription Tracker
+   DESIGN TOKENS — MiStream Subscription Tracker
    Based on DESIGN.md: Quiet Luxury + Modern Minimalism + Soft Glassmorphism
    ============================================================ */
 
@@ -7,14 +7,14 @@
 
 :root {
   /* ---- Color Palette ---- */
-  --color-surface:               #16130e;
-  --color-surface-dim:           #16130e;
-  --color-surface-bright:        #3d3933;
-  --color-surface-lowest:        #110e09;
-  --color-surface-low:           #1e1b16;
-  --color-surface-container:     #231f1a;
-  --color-surface-high:          #2d2924;
-  --color-surface-highest:       #38342e;
+  --color-surface:               #0a0908; /* Darkened */
+  --color-surface-dim:           #0a0908;
+  --color-surface-bright:        #2a2622;
+  --color-surface-lowest:        #000000; /* Darkened */
+  --color-surface-low:           #14120f;
+  --color-surface-container:     #1a1714;
+  --color-surface-high:          #24201c;
+  --color-surface-highest:       #2e2924;
 
   --color-on-surface:            #e9e1d8;
   --color-on-surface-variant:    #d1c5b4;
@@ -43,14 +43,14 @@
   --color-warning:               #ffd8a8;
   --color-warning-container:     #3a2a08;
 
-  --color-background:            #16130e;
+  --color-background:            #0a0908;
   --color-on-background:         #e9e1d8;
-  --color-surface-variant:       #38342e;
+  --color-surface-variant:       #2e2924;
 
   /* ---- Glass Effect ---- */
-  --glass-bg:                    rgba(35, 31, 26, 0.72);
-  --glass-bg-strong:             rgba(45, 41, 36, 0.90);
-  --glass-border:                rgba(233, 193, 118, 0.10);
+  --glass-bg:                    rgba(26, 23, 20, 0.72);
+  --glass-bg-strong:             rgba(36, 32, 28, 0.90);
+  --glass-border:                rgba(233, 193, 118, 0.08);
   --glass-blur:                  24px;
   --glass-blur-strong:           32px;
 

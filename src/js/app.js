@@ -20,22 +20,24 @@ window.registerRoute('/admin/users',    { render: window.renderAdmin,         mo
 window.registerRoute('/admin/payments', { render: window.renderAdmin,         mount: window.mountAdmin });
 window.registerRoute('/admin/services', { render: window.renderAdmin,         mount: window.mountAdmin });
 
-// Render function
+// Render function — transición rápida para no percibir demora
 function renderView(handler) {
   const view = document.getElementById('router-view');
   if (!view) return;
 
   view.style.opacity = '0';
-  view.style.transform = 'translateY(10px)';
-  view.style.transition = 'opacity 150ms, transform 150ms';
+  view.style.transform = 'translateY(6px)';
+  view.style.transition = 'opacity 80ms ease, transform 80ms ease';
 
   setTimeout(() => {
     view.innerHTML = handler.render();
-    view.style.opacity = '1';
-    view.style.transform = 'translateY(0)';
+    requestAnimationFrame(() => {
+      view.style.opacity = '1';
+      view.style.transform = 'translateY(0)';
+    });
     if (handler.mount) handler.mount();
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, 140);
+  }, 60);
 }
 
 function hideLoader() {
@@ -49,31 +51,19 @@ function hideLoader() {
 async function init() {
   console.log('[APP] Inicializando...');
 
-  // Desregistrar Service Workers viejos que podrían cachear archivos viejos
-  if ('serviceWorker' in navigator) {
-    const regs = await navigator.serviceWorker.getRegistrations();
-    for (const reg of regs) {
-      await reg.unregister();
-      console.log('[SW] Desregistrado:', reg.scope);
-    }
-  }
-
-  // Init router (registra el listener de hashchange pero no navega aún)
+  // Init router
   window.initRouter(renderView);
 
   // Esperar sesión de Supabase
-  console.log('[APP] Esperando store.init()...');
   try {
     await window.store.init();
-    console.log('[APP] store.init() completado.');
   } catch (err) {
     console.error('[APP] Error en store.init():', err);
   }
 
-  // Ahora que sabemos el estado de la sesión, ocultar loader y navegar
   hideLoader();
-  console.log('[APP] Loader oculto. Evaluando ruta...');
   window.handleRoute();
 }
 
 init();
+

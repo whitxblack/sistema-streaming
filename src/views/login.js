@@ -5,13 +5,7 @@ window.renderLogin = function() {
   return `
     <div class="login-page animate-fadeIn">
       <div class="login-logo animate-fadeInDown">
-        <div class="login-logo-icon">
-          <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
-            <path d="M12 24C12 17.373 17.373 12 24 12C30.627 12 36 17.373 36 24C36 30.627 30.627 36 24 36" stroke="#e9c176" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M24 18V24L28 27" stroke="#e9c176" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="login-logo-text">SubTrack</div>
+        <div class="login-logo-text">MiStream</div>
         <div class="login-logo-tagline">Gestor de Suscripciones Premium</div>
       </div>
       <div class="login-card animate-fadeInUp" style="animation-delay:100ms">

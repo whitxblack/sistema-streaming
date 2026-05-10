@@ -16,18 +16,21 @@ window.api = {
   },
 
   async fetchDolarRate() {
-    const saved = localStorage.getItem('dolarRate');
-    const updatedAt = localStorage.getItem('dolarUpdatedAt');
+    const saved = localStorage.getItem('euroRate');
+    const updatedAt = localStorage.getItem('euroUpdatedAt');
     const TTL = 15 * 60 * 1000;
     if (saved && updatedAt && (Date.now() - new Date(updatedAt).getTime()) < TTL) {
       return parseFloat(saved);
     }
     try {
-      const res = await fetch('https://ve.dolarapi.com/v1/cotizaciones');
+      const res = await fetch('https://ve.dolarapi.com/v1/euros');
       const data = await res.json();
       const oficial = data.find(c => c.fuente === 'oficial') || data[0];
       const rate = oficial?.promedio || oficial?.precio || null;
-      if (rate) { window.store.setDolarRate(rate); }
+      if (rate) {
+        localStorage.setItem('euroRate', rate);
+        localStorage.setItem('euroUpdatedAt', new Date().toISOString());
+      }
       return rate;
     } catch {
       return saved ? parseFloat(saved) : null;
@@ -37,12 +40,12 @@ window.api = {
   usdToBs(usd, rate) { return rate ? (usd * rate).toFixed(2) : null; },
 
   formatUSD(amount) {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount || 0);
+    return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(amount || 0);
   },
 
   formatBs(amount) {
     if (!amount) return '—';
-    return new Intl.NumberFormat('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amount) + ' Bs';
+    return 'Bs. ' + new Intl.NumberFormat('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amount);
   },
 
   getDaysUntilDue(nextDue) {
@@ -69,31 +72,31 @@ window.api = {
   },
 
   getServiceLogo(name, emoji) {
-    const knownLogos = {
-      'netflix': 'https://logo.clearbit.com/netflix.com',
-      'spotify': 'https://logo.clearbit.com/spotify.com',
-      'disney+': 'https://logo.clearbit.com/disneyplus.com',
-      'disney': 'https://logo.clearbit.com/disneyplus.com',
-      'hbo max': 'https://logo.clearbit.com/max.com',
-      'max': 'https://logo.clearbit.com/max.com',
-      'amazon prime': 'https://logo.clearbit.com/amazon.com',
-      'prime video': 'https://logo.clearbit.com/primevideo.com',
-      'youtube premium': 'https://logo.clearbit.com/youtube.com',
-      'youtube': 'https://logo.clearbit.com/youtube.com',
-      'apple tv+': 'https://logo.clearbit.com/apple.com',
-      'apple tv': 'https://logo.clearbit.com/apple.com',
-      'apple music': 'https://logo.clearbit.com/apple.com',
-      'paramount+': 'https://logo.clearbit.com/paramountplus.com',
-      'star+': 'https://logo.clearbit.com/starplus.com',
-      'crunchyroll': 'https://logo.clearbit.com/crunchyroll.com',
-      'playstation plus': 'https://logo.clearbit.com/playstation.com',
-      'xbox game pass': 'https://logo.clearbit.com/xbox.com',
-      'nintendo switch online': 'https://logo.clearbit.com/nintendo.com'
+    const localLogos = {
+      'netflix': 'logos/netflix.png',
+      'spotify': 'logos/spotify.png',
+      'disney+': 'logos/disney.svg',
+      'disney': 'logos/disney.svg',
+      'youtube premium': 'logos/youtube.png',
+      'youtube': 'logos/youtube.png',
+      'max (hbo)': 'logos/max.png',
+      'max': 'logos/max.png',
+      'hbo max': 'logos/max.png',
+      'amazon prime': 'logos/amazon.png',
+      'prime video': 'logos/amazon.png',
+      'apple tv+': 'logos/apple.png',
+      'apple tv': 'logos/apple.png',
+      'chatgpt plus': 'logos/chatgpt.png',
+      'chatgpt': 'logos/chatgpt.png',
+      'canva pro': 'logos/canva.png',
+      'canva': 'logos/canva.png'
     };
     const key = name.toLowerCase().trim();
-    if (knownLogos[key]) {
-      return `<img src="${knownLogos[key]}" alt="${name}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"/>`;
+    if (localLogos[key]) {
+      return `<img src="${localLogos[key]}" alt="${name}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"/>`;
     }
+    // If local logo is not available, we use the emoji fallback
+    // (Clearbit removed to prevent broken images if blocked)
     return `<span style="font-size:22px">${emoji || '📱'}</span>`;
   }
 };

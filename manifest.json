@@ -1,6 +1,6 @@
 {
-  "name": "SubTrack – Gestor de Suscripciones",
-  "short_name": "SubTrack",
+  "name": "MiStream – Gestor de Suscripciones",
+  "short_name": "MiStream",
   "description": "Administra tus suscripciones y pagos digitales con elegancia.",
   "start_url": "/index.html",
   "display": "standalone",

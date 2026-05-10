@@ -4,7 +4,7 @@
 window.renderDashboard = function() {
   return `
     <div class="app-layout">
-      ${window.renderTopNav('SubTrack')}
+      ${window.renderTopNav('MiStream')}
       <main class="page stagger" id="dashboard-content">
         <div class="empty-state">
           <div class="spinner spinner-lg"></div>
@@ -54,7 +54,7 @@ window.mountDashboard = async function() {
           </div>
           <div class="hero-meta-item">
             <div class="hero-meta-value">${rate ? parseFloat(rate).toFixed(2) : '—'}</div>
-            <div class="hero-meta-label">Bs/$</div>
+            <div class="hero-meta-label">Tasa BCV de Hoy - €</div>
           </div>
         </div>
       </div>
